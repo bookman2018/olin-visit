@@ -1,4 +1,5 @@
 function Problem4uib
+clf
   global c; c= 0.0;
   global k; k = 0.1;
   global ax2;
@@ -39,15 +40,15 @@ function plotter()
 hours = linspace(min(BacteriaData(:,1)),max(BacteriaData(:,1)));
 
 plot(ax2,BacteriaData(:,1),BacteriaData(:,2),'.','MarkerSize',20)
-hold on
+hold(ax2,'on')
 plot(ax2,hours,0.02*exp(k*hours) + (c/k) *(exp(k*hours) -1) ,'linewidth',2)
-hold off
-set(gca,'FontSize',20)
-xlabel('Year')
-ylabel('Population Density')
-title({'Bacteria Population w/' ;sprintf('k=%1.2f & c = %1.2f',k,c)})
-ylim([0,1.2*max(BacteriaData(:,2))])
-xlim([min(hours),max(hours)])
+hold(ax2,'off')
+set(ax2,'FontSize',20)
+xlabel(ax2,'Year')
+ylabel(ax2,'Population Density')
+title(ax2,{'Bacteria Population w/' ;sprintf('k=%1.2f & c = %1.2f',k,c)})
+ylim(ax2,[0,1.2*max(BacteriaData(:,2))])
+xlim(ax2,[min(hours),max(hours)])
 end
 function slide1 (h, event)
   global k;

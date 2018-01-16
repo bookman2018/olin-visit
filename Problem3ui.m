@@ -1,4 +1,5 @@
 function Problem3ui
+clf
   global M; M= 500000000;
   global k; k = 0.02;
   global ax2;
@@ -10,7 +11,8 @@ function Problem3ui
   text(0.05,.075,'k:','FontSize',16)
   text(0.05,.2,'M:','FontSize',16)
   %% Add ui 'slider' element      
-  hslider = uicontrol (                    ...
+  hslider = uicontrol (...
+      'parent', gcf,                ...
          'style', 'slider',                ...
          'Units', 'normalized',            ...
          'Position',[0.1 0.025 0.8 0.1], ...
@@ -39,15 +41,15 @@ function plotter()
 decades = linspace(min(HistoricalPopulationDataUS(:,1)),max(HistoricalPopulationDataUS(:,1)));
 
 plot(ax2,HistoricalPopulationDataUS(:,1),HistoricalPopulationDataUS(:,2)/1e6,'.','MarkerSize',20)
-hold on
+hold(ax2,'on')
 plot(ax2,decades,(3929214*M*exp(k*(decades-1790)))./((M-3929214) +3929214*exp(k*(decades-1790)) )/1e6,'linewidth',2)
-hold off
-set(gca,'FontSize',20)
-xlabel('Year')
-ylabel({'Population'; '(in millions of people)'})
-title({'US Population w/' ;sprintf('k=%1.2f & M = %1.2f (millions)',k,M/1e6)})
-ylim([0,1.2*max(HistoricalPopulationDataUS(:,2)/1e6)])
-xlim([min(decades),max(decades)])
+hold(ax2,'off')
+set(ax2,'FontSize',20)
+xlabel(ax2,'Year')
+ylabel(ax2,{'Population'; '(in millions of people)'})
+title(ax2,{'US Population w/' ;sprintf('k=%1.2f & M = %1.2f (millions)',k,M/1e6)})
+ylim(ax2,[0,1.2*max(HistoricalPopulationDataUS(:,2)/1e6)])
+xlim(ax2,[min(decades),max(decades)])
 end
 
 function slide1 (h, event)

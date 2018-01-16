@@ -17,6 +17,8 @@ for kk = 1:num_times
   plot(x,P0(x-A*sin(c*t)),'linewidth',2)
   title(sprintf('t=%1.2f',t),'fontsize',20)
   ylim([0,1.2*max(P0(x))])
+  xlabel('x')
+  ylabel('P','rot',0)
   set(gca,'fontsize',16) 
   legend('P(x,t)')
   pause(0.01)

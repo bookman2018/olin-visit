@@ -1,16 +1,17 @@
 function Problem2ui
+clf
   global c; c= 10000;
   global k; k = 0.02;
   global ax2;
-  ax1 = axes('Position',[0 0 1 1]); 
-  set(ax1,'Visible','off')
-  ax2 = axes ('position', [0.2, 0.3, 0.7, 0.5]);
+  f = figure(gcf);
+  ax1 = axes('Parent',f,'Position',[0 0 1 1],'Visible','off');
+  ax2 = axes ('Parent',f,'position', [0.2, 0.3, 0.7, 0.5]);
   plotter()
   axes(ax1)
   text(0.05,.075,'k:','FontSize',16)
   text(0.05,.2,'c:','FontSize',16)
   %% Add ui 'slider' element      
-  hslider = uicontrol (                    ...
+  hslider = uicontrol ('Parent',f,                    ...
          'style', 'slider',                ...
          'Units', 'normalized',            ...
          'Position',[0.1 0.025 0.8 0.1], ...
@@ -19,7 +20,7 @@ function Problem2ui
          'value', k,                      ...
          'callback', {@slide1}          ...
        );
- hslider2 = uicontrol (                    ...
+ hslider2 = uicontrol ('Parent',f,                    ...
    'style', 'slider',                ...
    'Units', 'normalized',            ...
    'position', [0.1 0.15 0.8 0.1], ...
@@ -40,15 +41,15 @@ function plotter()
 decades = linspace(min(HistoricalPopulationDataUS(:,1)),max(HistoricalPopulationDataUS(:,1)));
 
 plot(ax2,HistoricalPopulationDataUS(:,1),HistoricalPopulationDataUS(:,2)/1e6,'.','MarkerSize',20)
-hold on
+hold(ax2,'on');
 plot(ax2,decades,((3929214*k + c)*exp(k*(decades-1790))-c)/1e6/k,'linewidth',2)
-hold off
-set(gca,'FontSize',20)
-xlabel('Year')
-ylabel({'Population'; '(in millions of people)'})
-title({'US Population w/' ;sprintf('k=%1.2f & c = %1.2f',k,c)})
-ylim([0,1.2*max(HistoricalPopulationDataUS(:,2)/1e6)])
-xlim([min(decades),max(decades)])
+hold(ax2,'off');
+set(ax2,'FontSize',20)
+xlabel(ax2,'Year')
+ylabel(ax2,{'Population'; '(in millions of people)'})
+title(ax2,{'US Population w/' ;sprintf('k=%1.2f & c = %1.2f',k,c)})
+ylim(ax2,[0,1.2*max(HistoricalPopulationDataUS(:,2)/1e6)])
+xlim(ax2,[min(decades),max(decades)])
 end
 
 function slide1 (h, event)

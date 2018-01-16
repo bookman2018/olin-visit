@@ -1,4 +1,5 @@
 function Problem8ui
+clf
   global ax2;
   global x;
   global A;
@@ -18,11 +19,14 @@ function Problem8ui
   f = @(t,y) k*y.*(A(x) - y);
   
   
-  plot(ax2,x,P0(x),'linewidth',2,x,A(x),'linewidth',2)
-  title(sprintf('t=0'),'fontsize',20)
-  ylim([0,500])
-  set(gca,'fontsize',16)  
-  legend('P(x,t)','A(x)')
+  plot(ax2,x,P0(x),'linewidth',3);
+    hold(ax2,'on')
+    plot(ax2,x,A(x),'linewidth',2);
+    hold(ax2,'off')
+  title(ax2,sprintf('t=0'),'fontsize',20)
+  ylim(ax2,[0,500])
+  set(ax2,'fontsize',16)  
+  legend(ax2,'P(x,t)','A(x)')
   
   
   global sol
@@ -47,9 +51,12 @@ function plotter(h, event)
     global sol
     t = get (h, 'value');
     P = interp1(sol.x,sol.y',t);
-    plot(ax2,x,P,'linewidth',3,x,A(x),'linewidth',2)
-    title(sprintf('t=%1.2f',t),'fontsize',20)
-    ylim([0,500])
-    set(gca,'fontsize',16)  
-    legend('P(x,t)','A(x)')
+    plot(ax2,x,P,'linewidth',3);
+    hold(ax2,'on')
+    plot(ax2,x,A(x),'linewidth',2);
+    hold(ax2,'off')
+    title(ax2,sprintf('t=%1.2f',t),'fontsize',20)
+    ylim(ax2,[0,500])
+    set(ax2,'fontsize',16)  
+    legend(ax2,'P(x,t)','A(x)')
   end

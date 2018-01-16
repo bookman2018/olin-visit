@@ -6,7 +6,7 @@ x = linspace(0,100,1000)';
 h = x(2);
 
 
-f = @(t,y) -c*(y - circshift(y,1))/h
+f = @(t,y) -c*(y - circshift(y,1))/h;
 
 sol = ode45(f,[0,1],P0(x));
 
@@ -18,6 +18,8 @@ for kk = 1:num_times
   P = interp1(sol.x,sol.y',t);
   plot(x,P,'linewidth',2)
   title(sprintf('t=%1.2f',t),'fontsize',20)
+  xlabel('x')
+  ylabel('P','rot',0)
   ylim([0,1.2*max(P0(x))])
   set(gca,'fontsize',16)  
   legend('P(x,t)')

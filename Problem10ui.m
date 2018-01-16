@@ -1,4 +1,5 @@
 function Problem10ui
+clf
 global ax2;
   global x;
   global maxY;
@@ -21,10 +22,10 @@ f = @(t,y) -c*(y - circshift(y,1))/h;
   maxY = 1.2*max(P0(x));
   
   plot(ax2,x,P0(x),'linewidth',2)
-  title(sprintf('t=0'),'fontsize',20)
-  ylim([0,1.2*max(P0(x))])
+  title(ax2,sprintf('t=0'),'fontsize',20)
+  ylim(ax2,[0,1.2*max(P0(x))])
   set(gca,'fontsize',16)  
-  legend('P(x,t)')
+  legend(ax2,'P(x,t)')
   
   
   global sol
@@ -50,8 +51,8 @@ function plotter(h, event)
     t = get (h, 'value');
     P = interp1(sol.x,sol.y',t);
     plot(ax2,x,P,'linewidth',2)
-    title(sprintf('t=%1.2f',t),'fontsize',20)
-    ylim([0,maxY])
+    title(ax2,sprintf('t=%1.2f',t),'fontsize',20)
+    ylim(ax2,[0,maxY])
     set(gca,'fontsize',16)  
-    legend('P(x,t)')
+    legend(ax2,'P(x,t)')
   end
